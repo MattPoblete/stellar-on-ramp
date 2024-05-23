@@ -1,0 +1,21 @@
+.ConnectButton {
+    background-color: #28ec12;
+    padding: 0px 16px;
+    border-radius: 28px;
+    color: black;
+}
+.ConnectButton:hover {
+    background-color: #4bfa37;
+    transform: scale(1.01);
+}
+
+.ConnectButton__disabled {
+    cursor: not-allowed !important; 
+    background-color: rgba(180, 180, 180, 0.466) !important;
+    padding: 0px 16px;
+    color: rgba(160, 160, 160, 0.473);
+    border-radius: 28px;
+}
+.ConnectButton__disabled > *{
+    cursor: not-allowed !important;
+}

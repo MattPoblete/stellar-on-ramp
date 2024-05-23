@@ -1,0 +1,12 @@
+.navbar {
+    position: fixed;
+    padding: 8px 0px;
+    min-width:100%;
+    z-index: 2;
+    backdrop-filter: blur(2px);
+}
+
+.navbar__logo {
+    display: flex;
+    justify-content: center;
+}

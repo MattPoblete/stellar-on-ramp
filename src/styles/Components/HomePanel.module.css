@@ -1,0 +1,9 @@
+.home_panel {
+    width: inherit;
+    background: -webkit-radial-gradient(circle farthest-side at 95% 5%, #5c01cc 20%, #0d061641);
+    background: radial-gradient(circle farthest-side at 95% 5%, #5c01cc 20%, #0d06164b);
+    backdrop-filter: blur(6px);
+    border-radius: 16px;
+    outline: #34354041 solid 1px; 
+    min-height: 500px;
+}

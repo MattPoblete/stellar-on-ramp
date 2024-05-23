@@ -1,0 +1,15 @@
+.about__panel {
+    background: -webkit-radial-gradient(circle farthest-side at 5% 95%, #22a522 10%, #0d061641);
+    background: radial-gradient(circle farthest-side at 5% 95%, #00ff005b 10%, #0d06164b);
+    backdrop-filter: blur(6px);
+    border-radius: 16px;
+    outline: #34354041 solid 1px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 32px;
+}
+
+.about__panel > p > a {
+    color: rgb(4, 255, 67);
+}

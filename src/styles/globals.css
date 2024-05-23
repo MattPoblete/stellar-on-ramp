@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  color: #fff;
+  background-image: radial-gradient(#060606c0 4px, transparent 4px);
+  background-size: 24px 24px;
+  background-color: #000000;
+  height: 100vh;
+}
+
+h1 {
+  font-weight: 800;
+  font-size: 2rem;
+}
+
+.app-container {
+  height: 100%;
+}
