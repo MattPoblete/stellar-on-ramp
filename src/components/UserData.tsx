@@ -5,11 +5,18 @@ import buttonStyles from '@/styles/Components/ConnectWalletButton.module.css'
 import ConnectWalletButton from './ConnectWalletButton'
 import { useAppSelector } from '@/lib/hooks'
 import * as sdk from '@stellar/stellar-sdk'
+import axios from 'axios'
+import toml from 'toml'
+
+import { useSorobanReact } from '@soroban-react/core'
+import { getChallengeTransaction } from '@/methods/sep10Auth/stellarAuth'
+
 
 function UserData() {
-    //const { address } = sorobanContext
+    const sorobanContext = useSorobanReact()
     const [header, setHeader] = useState('Connect your wallet.')
     const address = useAppSelector((state) => state.wallet.address)
+    const selectedChain = useAppSelector((state) => state.wallet.selectedChain)
 
     useEffect(()=>{
       if(address){
@@ -17,7 +24,22 @@ function UserData() {
       }
     },[address])
 
-    const showKeyPair = () => {
+    const sign = async (txn: any)=>{ 
+      const signedTransaction = await sorobanContext?.activeConnector?.signTransaction(txn, {
+      networkPassphrase: selectedChain.networkPassphrase,
+      network: selectedChain.id,
+      accountToSign: address
+      })
+      return signedTransaction;
+    }
+
+    const dev = async () => {
+      const { transaction, network_passphrase } = await getChallengeTransaction({
+        publicKey: address, 
+        homeDomain:'https://testanchor.stellar.org'
+      })
+      console.log(transaction)
+      const signedTransaction = await sign(transaction)
 
     }
 
@@ -31,7 +53,7 @@ function UserData() {
                {address}
             </h2>
             <ConnectWalletButton data-testid='button' label={address == '' ? 'Connect wallet now!': 'Wallet connected'}/>
-            <button className={buttonStyles.ConnectButton} style={{height:50}} onClick={showKeyPair}>Show keyPair</button>
+            <button className={buttonStyles.ConnectButton} style={{height:50}} onClick={dev}>Show keyPair</button>
         </div>
     )
 }
