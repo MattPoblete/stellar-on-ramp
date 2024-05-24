@@ -15,7 +15,14 @@
     padding: 0px 16px;
     color: rgba(160, 160, 160, 0.473);
     border-radius: 28px;
+    height: 50px !important;
+
 }
 .ConnectButton__disabled > *{
     cursor: not-allowed !important;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    height: 100%;
 }
