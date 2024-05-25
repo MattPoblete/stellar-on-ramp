@@ -1,6 +1,7 @@
 import { Operation, WebAuth, xdr } from "@stellar/stellar-sdk";
 import { getStellarToml, getAuthUrl } from "../SEP-1";
 
+//TODO: Add memo to operation
 export async function getChallengeTransaction({ 
   publicKey, 
   homeDomain 
@@ -31,7 +32,6 @@ export async function getChallengeTransaction({
       })}`
   )
   let json = await res.json()
-  console.log(json.transaction)
   // Validate the challenge transaction meets all the requirements for SEP-10
   validateChallengeTransaction({
       transactionXDR: json.transaction,
@@ -43,6 +43,8 @@ export async function getChallengeTransaction({
   return json
 }
 
+//TODO: Fix Err400 { message: '{"name":"InvalidChallengeError"}' 
+// decode transaction & validate the values
 function validateChallengeTransaction({
   transactionXDR,
   serverSigningKey,
@@ -65,7 +67,6 @@ function validateChallengeTransaction({
   try {
       // Use the `readChallengeTx` function from Stellar SDK to read and
       // verify most of the challenge transaction information
-      console.log('evaluate readChallengeTx')
       let results = WebAuth.readChallengeTx(
           transactionXDR,
           serverSigningKey,
@@ -85,6 +86,7 @@ function validateChallengeTransaction({
   }
 }
 
+//TODO: Implement token validations https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0010.md#token
 export async function submitChallengeTransaction({ 
   transactionXDR,
   homeDomain
