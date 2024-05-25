@@ -4,12 +4,10 @@ import styles from '@/styles/Components/UserData.module.css'
 import buttonStyles from '@/styles/Components/ConnectWalletButton.module.css'
 import ConnectWalletButton from './ConnectWalletButton'
 import { useAppSelector } from '@/lib/hooks'
-import * as sdk from '@stellar/stellar-sdk'
-import axios from 'axios'
-import toml from 'toml'
+
 
 import { useSorobanReact } from '@soroban-react/core'
-import { getChallengeTransaction } from '@/methods/sep10Auth/stellarAuth'
+import { getChallengeTransaction, submitChallengeTransaction } from '@/methods/sep10Auth/stellarAuth'
 
 
 function UserData() {
@@ -38,8 +36,12 @@ function UserData() {
         publicKey: address, 
         homeDomain:'https://testanchor.stellar.org'
       })
-      console.log(transaction)
       const signedTransaction = await sign(transaction)
+      const submittedTransaction = await submitChallengeTransaction({
+        transactionXDR: signedTransaction,
+        homeDomain:'https://testanchor.stellar.org'
+      })
+      console.log('✅', submittedTransaction)
 
     }
 
@@ -53,7 +55,7 @@ function UserData() {
                {address}
             </h2>
             <ConnectWalletButton data-testid='button' label={address == '' ? 'Connect wallet now!': 'Wallet connected'}/>
-            <button className={buttonStyles.ConnectButton} style={{height:50}} onClick={dev}>Show keyPair</button>
+            <button disabled={!address} className={!address ?  buttonStyles.ConnectButton__disabled : buttonStyles.ConnectButton} style={{height:50}} onClick={dev}>Deposit</button>
         </div>
     )
 }

@@ -88,9 +88,14 @@ function validateChallengeTransaction({
 export async function submitChallengeTransaction({ 
   transactionXDR,
   homeDomain
-}: { transactionXDR: any, homeDomain: string}) {
+}: { 
+  transactionXDR: string | undefined, 
+  homeDomain: string
+}) {
+  if (!transactionXDR || transactionXDR === undefined){
+    console.error('invalid transaction xdr')
+  }
   let webAuthEndpoint = await getAuthUrl(homeDomain)
-
   if (!webAuthEndpoint)
       console.error(500, { message: 'could not authenticate with server (missing toml entry)' })
   let res = await fetch(webAuthEndpoint, {
