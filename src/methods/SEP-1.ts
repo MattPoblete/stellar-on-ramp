@@ -24,7 +24,7 @@ export async function getKycUrl(home_domain: string) {
 
 export async function getTransferServerUrl(home_domain: string) {
   const toml = await getStellarToml(home_domain);
-  return toml[TomlFields.TRANSFER_SERVER];
+  return toml[TomlFields.TRANSFER_SERVER_SEP0024];
 }
 
 export async function getDepositServerUrl(home_domain: string) {
